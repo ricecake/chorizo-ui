@@ -1,28 +1,30 @@
 import React from "react";
 import {
-	HashRouter as Router,
 	Switch,
 	Route,
-	withRouter,
 } from "react-router-dom";
 
 import Header from "Component/Header";
 
-const RouteHeader = withRouter(Header);
-
 export const All = (props) => (
-	<div>
-		<Router hashType="noslash">
-			<RouteHeader title="All"/>
+	<React.Fragment>
+		<Header title="All" tabs={[
+			{ label: "Parrots", value:"" },
+			{ label: "Cat" },
+			{ label: "Dog" },
+		]}>
 			<Switch>
-				<Route path="/a">
+				<Route path="/Cat">
 					<h1>Cats</h1>
 				</Route>
-				<Route path="/b">
+				<Route path="/Dog">
 					<h1>Dogs</h1>
 				</Route>
+				<Route path="/">
+					<h1>Parrots!</h1>
+				</Route>
 			</Switch>
-		</Router>
-	</div>
+		</Header>
+	</React.Fragment>
 );
 export default All;
