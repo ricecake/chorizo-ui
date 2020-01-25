@@ -1,11 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "Page/index";
-import BasePage from "Component/BasePage"
+import { Provider } from 'react-redux';
+import { OidcProvider } from 'redux-oidc';
 
-console.log("HERE!");
+import store from 'Include/store';
+import userManager from 'Include/userManager';
+
+import App from "Page/index";
+
 ReactDOM.render((
-      <BasePage>
-        <App />
-      </BasePage>
+	<Provider store={store}>
+		<OidcProvider store={store} userManager={userManager}>
+			<App />
+		</OidcProvider>
+	</Provider>
 ), document.body);
