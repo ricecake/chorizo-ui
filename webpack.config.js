@@ -1,3 +1,4 @@
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const glob = require('glob')
 const path = require("path");
@@ -18,13 +19,16 @@ console.log(pages);
 module.exports = {
 	mode: "production",
 	entry: {
-		app: './source/app.jsx',
+		app: path.resolve(__dirname, 'source/app.jsx'),
 	},
 	output: {
 		filename: '[name].js',
+		chunkFilename: '[name].bundle.js',
 		path: path.resolve(__dirname) +'/built/',
+		publicPath: '/',
 	},
 	plugins: [
+		new CleanWebpackPlugin(),
 		...pages.map(page => new HtmlWebpackPlugin({
 			filename: page,
 		})),
@@ -42,7 +46,7 @@ module.exports = {
 	optimization: {
 		minimize: true,
 		usedExports: true,
-		// runtimeChunk: 'single',
+		runtimeChunk: 'single',
 		splitChunks: {
 			cacheGroups: {
 				vendor: {
