@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 
 import { createMuiTheme, ThemeProvider, withStyles } from '@material-ui/core/styles';
@@ -153,8 +152,20 @@ theme = {
 import Navigator from "Component/Navigator";
 
 const Home  = lazy(() => import('Page/home'));
-const About = lazy(() => import('Page/about'));
-const Users = lazy(() => import('Page/users'));
+
+const ChoresUpcoming = lazy(() => import('Page/chores/upcoming'));
+const ChoresOverdue  = lazy(() => import('Page/chores/overdue'));
+const ChoresAll      = lazy(() => import('Page/chores/all'));
+const Chores         = lazy(() => import('Page/chores'));
+
+const PeopleFriends = lazy(() => import('Page/people/friends'));
+const PeopleProfile = lazy(() => import('Page/people/profile'));
+const PeopleShop    = lazy(() => import('Page/people/shop'));
+const People        = lazy(() => import('Page/people'));
+
+const TeamsEvaluate = lazy(() => import('Page/teams/evaluate'));
+const TeamsManage   = lazy(() => import('Page/teams/manage'));
+const Teams         = lazy(() => import('Page/teams'));
 
 export const App = (props) => {
 	const { classes } = props;
@@ -178,12 +189,42 @@ export const App = (props) => {
 					<Router>
 						<Suspense fallback={<div>Loading...</div>}>
 							<Switch>
-								<Route path="/about">
-									<About />
+								<Route path="/chores/upcoming">
+									<ChoresUpcoming />
 								</Route>
-								<Route path="/users">
-									<Users />
+								<Route path="/chores/overdue">
+									<ChoresOverdue />
 								</Route>
+								<Route path="/chores/all">
+									<ChoresAll />
+								</Route>
+								<Route path="/chores/">
+									<Chores />
+								</Route>
+
+								<Route path="/people/friends">
+									<PeopleFriends />
+								</Route>
+								<Route path="/people/profile">
+									<PeopleProfile />
+								</Route>
+								<Route path="/people/shop">
+									<PeopleShop />
+								</Route>
+								<Route path="/people/">
+									<People />
+								</Route>
+
+								<Route path="/teams/evaluate">
+									<TeamsEvaluate />
+								</Route>
+								<Route path="/teams/manage">
+									<TeamsManage />
+								</Route>
+								<Route path="/teams">
+									<Teams />
+								</Route>
+
 								<Route path="/">
 									<Home />
 								</Route>

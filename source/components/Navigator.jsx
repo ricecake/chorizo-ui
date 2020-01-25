@@ -26,7 +26,7 @@ const categories = [
 	{
 		id: 'Chores',
 		children: [
-			{ id: 'Upcoming', icon: <TimerIcon />, active: true },
+			{ id: 'Upcoming', icon: <TimerIcon /> },
 			{ id: 'Overdue', icon: <TimerIcon /> },
 			{ id: 'All', icon: <PublicIcon /> },
 		],
