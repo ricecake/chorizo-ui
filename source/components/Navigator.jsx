@@ -97,54 +97,52 @@ function Navigator(props) {
 
 	return (
 		<Drawer variant="permanent" {...other}>
-			{/* <Router> */}
-				<List disablePadding>
-					<ListItem className={clsx(classes.firebase, classes.item, classes.itemCategory)}>
-						Chorizo
-					</ListItem>
+			<List disablePadding>
+				<ListItem className={clsx(classes.firebase, classes.item, classes.itemCategory)}>
+					Chorizo
+				</ListItem>
 
-					<NavLink exact to={`/`.toLowerCase()} activeClassName={classes.itemActiveItem} className={classes.item}>
-						<ListItem className={clsx(classes.itemCategory)}>
-							<ListItemIcon className={classes.itemIcon}>
-								<HomeIcon />
-							</ListItemIcon>
-							<ListItemText
-								classes={{
-									primary: classes.itemPrimary,
-								}}
-							>
-								To-Do's and Chore Overview
-							</ListItemText>
-						</ListItem>
-					</NavLink>
-					{categories.map(({ id, children }) => (
-						<React.Fragment key={id}>
-							<NavLink to={`/${id}/`.toLowerCase()} activeClassName={classes.itemActiveItem} className={classes.item}>
-								<ListItem className={classes.categoryHeader}>
-									<ListItemText>
-										{id}
+				<NavLink exact to={`/`.toLowerCase()} activeClassName={classes.itemActiveItem} className={classes.item}>
+					<ListItem className={clsx(classes.itemCategory)}>
+						<ListItemIcon className={classes.itemIcon}>
+							<HomeIcon />
+						</ListItemIcon>
+						<ListItemText
+							classes={{
+								primary: classes.itemPrimary,
+							}}
+						>
+							To-Do's and Chore Overview
+						</ListItemText>
+					</ListItem>
+				</NavLink>
+				{categories.map(({ id, children }) => (
+					<React.Fragment key={id}>
+						<NavLink to={`/${id}/`.toLowerCase()} activeClassName={classes.itemActiveItem} className={classes.item}>
+							<ListItem className={classes.categoryHeader}>
+								<ListItemText>
+									{id}
+								</ListItemText>
+							</ListItem>
+						</NavLink>
+						{children.map(({ id: childId, icon, active }) => (
+							<NavLink to={`/${id}/${childId}/`.toLowerCase()} activeClassName={classes.itemActiveItem} className={classes.item}>
+								<ListItem
+									key={childId}
+									button
+								>
+									<ListItemIcon className={classes.itemIcon}>{icon}</ListItemIcon>
+									<ListItemText classes={{ primary: classes.itemPrimary }} >
+										{childId}
 									</ListItemText>
 								</ListItem>
 							</NavLink>
-							{children.map(({ id: childId, icon, active }) => (
-								<NavLink to={`/${id}/${childId}/`.toLowerCase()} activeClassName={classes.itemActiveItem} className={classes.item}>
-									<ListItem
-										key={childId}
-										button
-									>
-										<ListItemIcon className={classes.itemIcon}>{icon}</ListItemIcon>
-										<ListItemText classes={{ primary: classes.itemPrimary }} >
-											{childId}
-										</ListItemText>
-									</ListItem>
-								</NavLink>
-							))}
+						))}
 
-							<Divider className={classes.divider} />
-						</React.Fragment>
-					))}
-				</List>
-			{/* </Router> */}
+						<Divider className={classes.divider} />
+					</React.Fragment>
+				))}
+			</List>
 		</Drawer>
 	);
 }
