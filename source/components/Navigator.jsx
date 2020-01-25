@@ -16,6 +16,12 @@ import TimerIcon from '@material-ui/icons/Timer';
 import SettingsIcon from '@material-ui/icons/Settings';
 import PhonelinkSetupIcon from '@material-ui/icons/PhonelinkSetup';
 
+import {
+	BrowserRouter as Router,
+	NavLink,
+} from "react-router-dom";
+
+
 const categories = [
 	{
 		id: 'Chores',
@@ -35,9 +41,9 @@ const categories = [
 	{
 		id: 'People',
 		children: [
-			{ id: 'My Profile', icon: <PeopleIcon /> },
-			{ id: 'My Friends', icon: <PeopleIcon /> },
-			{ id: 'My Communication settings', icon: <PhonelinkSetupIcon /> },
+			{ id: 'Profile', icon: <PeopleIcon /> },
+			{ id: 'Friends', icon: <PeopleIcon /> },
+			{ id: 'Shop', icon: <PhonelinkSetupIcon /> },
 		],
 	},
 ];
@@ -54,6 +60,8 @@ const styles = theme => { console.log(theme);return {
 		paddingTop: 1,
 		paddingBottom: 1,
 		color: 'rgba(255, 255, 255, 0.7)',
+		outline: 'none',
+		'text-decoration': 'none',
 		'&:hover,&:focus': {
 			backgroundColor: 'rgba(255, 255, 255, 0.08)',
 		},
@@ -89,54 +97,54 @@ function Navigator(props) {
 
 	return (
 		<Drawer variant="permanent" {...other}>
-			<List disablePadding>
-				<ListItem className={clsx(classes.firebase, classes.item, classes.itemCategory)}>
-					Chorizo
-				</ListItem>
-				<ListItem className={clsx(classes.item, classes.itemCategory)}>
-					<ListItemIcon className={classes.itemIcon}>
-						<HomeIcon />
-					</ListItemIcon>
-					<ListItemText
-						classes={{
-							primary: classes.itemPrimary,
-						}}
-					>
-						To-Do's and Chore Overview
-					</ListItemText>
-				</ListItem>
-				{categories.map(({ id, children }) => (
-					<React.Fragment key={id}>
-						<ListItem className={classes.categoryHeader}>
+			<Router>
+				<List disablePadding>
+					<ListItem className={clsx(classes.firebase, classes.item, classes.itemCategory)}>
+						Chorizo
+					</ListItem>
+
+					<NavLink exact to={`/`.toLowerCase()} activeClassName={classes.itemActiveItem} className={classes.item}>
+						<ListItem className={clsx(classes.itemCategory)}>
+							<ListItemIcon className={classes.itemIcon}>
+								<HomeIcon />
+							</ListItemIcon>
 							<ListItemText
 								classes={{
-									primary: classes.categoryHeaderPrimary,
+									primary: classes.itemPrimary,
 								}}
 							>
-								{id}
+								To-Do's and Chore Overview
 							</ListItemText>
 						</ListItem>
-						{children.map(({ id: childId, icon, active }) => (
-							<ListItem
-								key={childId}
-								button
-								className={clsx(classes.item, active && classes.itemActiveItem)}
-							>
-								<ListItemIcon className={classes.itemIcon}>{icon}</ListItemIcon>
-								<ListItemText
-									classes={{
-										primary: classes.itemPrimary,
-									}}
-								>
-									{childId}
-								</ListItemText>
-							</ListItem>
-						))}
+					</NavLink>
+					{categories.map(({ id, children }) => (
+						<React.Fragment key={id}>
+							<NavLink to={`/${id}/`.toLowerCase()} activeClassName={classes.itemActiveItem} className={classes.item}>
+								<ListItem className={classes.categoryHeader}>
+									<ListItemText>
+										{id}
+									</ListItemText>
+								</ListItem>
+							</NavLink>
+							{children.map(({ id: childId, icon, active }) => (
+								<NavLink to={`/${id}/${childId}/`.toLowerCase()} activeClassName={classes.itemActiveItem} className={classes.item}>
+									<ListItem
+										key={childId}
+										button
+									>
+										<ListItemIcon className={classes.itemIcon}>{icon}</ListItemIcon>
+										<ListItemText classes={{ primary: classes.itemPrimary }} >
+											{childId}
+										</ListItemText>
+									</ListItem>
+								</NavLink>
+							))}
 
-						<Divider className={classes.divider} />
-					</React.Fragment>
-				))}
-			</List>
+							<Divider className={classes.divider} />
+						</React.Fragment>
+					))}
+				</List>
+			</Router>
 		</Drawer>
 	);
 }

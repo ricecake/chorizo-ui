@@ -1,7 +1,9 @@
 import React from "react";
+import Header from "Component/Header";
 
-export const Users = () => {
-	return <h2>Users</h2>;
-};
-
+export const Users = (props) => (
+	<div>
+		<Header title="Users"/>
+	</div>
+);
 export default Users;

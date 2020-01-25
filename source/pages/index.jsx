@@ -9,7 +9,6 @@ import {
 import { createMuiTheme, ThemeProvider, withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Hidden from '@material-ui/core/Hidden';
-import Typography from '@material-ui/core/Typography';
 
 let theme = createMuiTheme({
 	palette: {
@@ -152,7 +151,6 @@ theme = {
 
 
 import Navigator from "Component/Navigator";
-import Header from "Component/Header";
 
 const Home  = lazy(() => import('Page/home'));
 const About = lazy(() => import('Page/about'));
@@ -160,11 +158,6 @@ const Users = lazy(() => import('Page/users'));
 
 export const App = (props) => {
 	const { classes } = props;
-	const [mobileOpen, setMobileOpen] = React.useState(false);
-
-	const handleDrawerToggle = () => {
-	  setMobileOpen(!mobileOpen);
-	};
 
 	return (
 		<ThemeProvider theme={theme}>
@@ -175,8 +168,6 @@ export const App = (props) => {
 						<Navigator
 							PaperProps={{ style: { width: drawerWidth } }}
 							variant="temporary"
-							open={mobileOpen}
-							onClose={handleDrawerToggle}
 						/>
 					</Hidden>
 					<Hidden xsDown implementation="css">
@@ -184,7 +175,6 @@ export const App = (props) => {
 					</Hidden>
 				</nav>
 				<div className={classes.app}>
-					<Header onDrawerToggle={handleDrawerToggle} />
 					<Router>
 						<Suspense fallback={<div>Loading...</div>}>
 							<Switch>
