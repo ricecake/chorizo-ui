@@ -23,7 +23,7 @@ module.exports = {
 	},
 	output: {
 		filename: '[name].js',
-		chunkFilename: '[name].bundle.js',
+		chunkFilename: '[chunkhash].bundle.js',
 		path: path.resolve(__dirname) +'/built/',
 		publicPath: '/',
 	},
@@ -49,11 +49,21 @@ module.exports = {
 		runtimeChunk: 'single',
 		splitChunks: {
 			cacheGroups: {
-				vendor: {
-					test: /[\\/]node_modules[\\/]/,
-					name: 'vendors',
+				react: {
+					test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+					name: 'react',
 					chunks: 'all',
 				},
+				material: {
+					test: /[\\/]node_modules[\\/]@material-ui[\\/]/,
+					name: 'material',
+					chunks: 'all',
+				},
+				// vendor: {
+				// 	test: /[\\/]node_modules[\\/]/,
+				// 	name: 'vendors',
+				// 	chunks: 'all',
+				// },
 			},
 		},
 	},
