@@ -17,6 +17,13 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
+import {
+	HashRouter as Router,
+	Switch,
+	Route,
+	NavLink
+} from "react-router-dom";
+
 const lightColor = 'rgba(255, 255, 255, 0.7)';
 
 const styles = theme => ({
@@ -101,11 +108,11 @@ function Header(props) {
 				position="static"
 				elevation={0}
 			>
-				<Tabs value={0} textColor="inherit">
-					<Tab textColor="inherit" label="Users" />
-					<Tab textColor="inherit" label="Sign-in method" />
-					<Tab textColor="inherit" label="Templates" />
-					<Tab textColor="inherit" label="Usage" />
+				<Tabs value={ props.location.pathname } textColor="inherit">
+					<Tab textColor="inherit" label="Users" value="/a" component={NavLink} to="/a"/>
+					<Tab textColor="inherit" label="Sign-in method"  value="/b" component={NavLink} to="/b"/>
+					<Tab textColor="inherit" label="Templates"  value="/c" component={NavLink} to="/c"/>
+					<Tab textColor="inherit" label="Usage"  value="/d" component={NavLink} to="/d"/>
 				</Tabs>
 			</AppBar>
 		</React.Fragment>
