@@ -97,7 +97,7 @@ function Navigator(props) {
 
 	return (
 		<Drawer variant="permanent" {...other}>
-			<Router>
+			{/* <Router> */}
 				<List disablePadding>
 					<ListItem className={clsx(classes.firebase, classes.item, classes.itemCategory)}>
 						Chorizo
@@ -144,7 +144,7 @@ function Navigator(props) {
 						</React.Fragment>
 					))}
 				</List>
-			</Router>
+			{/* </Router> */}
 		</Drawer>
 	);
 }

@@ -172,66 +172,66 @@ export const App = (props) => {
 
 	return (
 		<ThemeProvider theme={theme}>
+			<CssBaseline />
 			<div className={classes.root}>
-				<CssBaseline />
-				<nav className={classes.drawer}>
-					<Hidden smUp implementation="js">
-						<Navigator
-							PaperProps={{ style: { width: drawerWidth } }}
-							variant="temporary"
-						/>
-					</Hidden>
-					<Hidden xsDown implementation="css">
-						<Navigator PaperProps={{ style: { width: drawerWidth } }} />
-					</Hidden>
-				</nav>
-				<div className={classes.app}>
 					<Router>
-						<Suspense fallback={<div>Loading...</div>}>
-							<Switch>
-								<Route path="/chores/upcoming">
-									<ChoresUpcoming />
-								</Route>
-								<Route path="/chores/overdue">
-									<ChoresOverdue />
-								</Route>
-								<Route path="/chores/all">
-									<ChoresAll />
-								</Route>
-								<Route path="/chores/">
-									<Chores />
-								</Route>
+						<nav className={classes.drawer}>
+							<Hidden smUp implementation="js">
+								<Navigator
+									PaperProps={{ style: { width: drawerWidth } }}
+									variant="temporary"
+								/>
+							</Hidden>
+							<Hidden xsDown implementation="css">
+								<Navigator PaperProps={{ style: { width: drawerWidth } }} />
+							</Hidden>
+						</nav>
+						<div className={classes.app}>
+							<Suspense fallback={<div>Loading...</div>}>
+								<Switch>
+									<Route path="/chores/upcoming">
+										<ChoresUpcoming />
+									</Route>
+									<Route path="/chores/overdue">
+										<ChoresOverdue />
+									</Route>
+									<Route path="/chores/all">
+										<ChoresAll />
+									</Route>
+									<Route path="/chores/">
+										<Chores />
+									</Route>
 
-								<Route path="/people/friends">
-									<PeopleFriends />
-								</Route>
-								<Route path="/people/profile">
-									<PeopleProfile />
-								</Route>
-								<Route path="/people/shop">
-									<PeopleShop />
-								</Route>
-								<Route path="/people/">
-									<People />
-								</Route>
+									<Route path="/people/friends">
+										<PeopleFriends />
+									</Route>
+									<Route path="/people/profile">
+										<PeopleProfile />
+									</Route>
+									<Route path="/people/shop">
+										<PeopleShop />
+									</Route>
+									<Route path="/people/">
+										<People />
+									</Route>
 
-								<Route path="/teams/evaluate">
-									<TeamsEvaluate />
-								</Route>
-								<Route path="/teams/manage">
-									<TeamsManage />
-								</Route>
-								<Route path="/teams">
-									<Teams />
-								</Route>
+									<Route path="/teams/evaluate">
+										<TeamsEvaluate />
+									</Route>
+									<Route path="/teams/manage">
+										<TeamsManage />
+									</Route>
+									<Route path="/teams">
+										<Teams />
+									</Route>
 
-								<Route path="/">
-									<Home />
-								</Route>
-							</Switch>
-						</Suspense>
+									<Route path="/">
+										<Home />
+									</Route>
+								</Switch>
+							</Suspense>
+						</div>
 					</Router>
-				</div>
 			</div>
 		</ThemeProvider>
 	);
