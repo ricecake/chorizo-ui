@@ -1,7 +1,6 @@
 import React from 'react';
 
 export const Hide = ({ If: condition, children }) => {
-	console.log(condition);
 	if ( condition ) {
 		return null;
 	}

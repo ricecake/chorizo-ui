@@ -48,7 +48,7 @@ const categories = [
 	},
 ];
 
-const styles = theme => { console.log(theme);return {
+const styles = theme => ({
 	categoryHeader: {
 		paddingTop: theme.spacing(2),
 		paddingBottom: theme.spacing(2),
@@ -89,10 +89,9 @@ const styles = theme => { console.log(theme);return {
 	divider: {
 		marginTop: theme.spacing(2),
 	},
-};};
+});
 
 function Navigator(props) {
-	console.log(props);
 	const { classes, ...other } = props;
 
 	return (

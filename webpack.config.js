@@ -64,11 +64,6 @@ module.exports = {
 					name: 'material',
 					chunks: 'all',
 				},
-				// vendor: {
-				// 	test: /[\\/]node_modules[\\/]/,
-				// 	name: 'vendors',
-				// 	chunks: 'all',
-				// },
 			},
 		},
 	},

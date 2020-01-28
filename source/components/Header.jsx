@@ -105,7 +105,6 @@ function Header(props) {
 			</AppBar>
 
 			<Show If={ props.tabs }>
-				{ console.log(props, props.tabs) }
 				<Router hashType="noslash">
 					<AppBar
 						component="div"

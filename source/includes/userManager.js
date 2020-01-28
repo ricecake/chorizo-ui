@@ -1,8 +1,6 @@
 import { createUserManager } from 'redux-oidc';
 import MergedConfig from 'Include/config';
 
-console.log(MergedConfig);
-
 const userManagerConfig = {
 	...MergedConfig.identity,
 	authority: MergedConfig.hosts.idp_path,
