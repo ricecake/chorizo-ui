@@ -2,6 +2,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const glob = require('glob')
 const path = require("path");
+const webpack = require("webpack");
 
 let pages = glob.sync(path.resolve(__dirname, 'source/pages/**/*.jsx')).reduce((acc, path) => {
 	const entry = path.replace(new RegExp('^.+/source/pages/'), '').replace(".jsx", '');
@@ -29,6 +30,9 @@ module.exports = {
 	},
 	plugins: [
 		new CleanWebpackPlugin(),
+		new webpack.EnvironmentPlugin({
+			production: false,
+		}),
 		...pages.map(page => new HtmlWebpackPlugin({
 			filename: page,
 		})),
@@ -47,6 +51,7 @@ module.exports = {
 		minimize: true,
 		usedExports: true,
 		runtimeChunk: 'single',
+		moduleIds: 'hashed',
 		splitChunks: {
 			cacheGroups: {
 				react: {

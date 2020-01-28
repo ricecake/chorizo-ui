@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "serve": "webpack-dev-server"
+    "serve": "webpack-dev-server",
+    "prod-build": "PRODUCTION=true webpack"
   },
   "author": "",
   "license": "ISC",
@@ -33,6 +34,7 @@
     "@babel/polyfill": "^7.7.0",
     "@material-ui/core": "^4.7.1",
     "@material-ui/icons": "^4.5.1",
+    "deepmerge": "^4.2.2",
     "oidc-client": "^1.9.1",
     "react-redux": "^7.1.3",
     "react-router-dom": "^5.1.2",
