@@ -7,25 +7,13 @@ import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import Tab from '@material-ui/core/Tab';
-import Tabs from '@material-ui/core/Tabs';
 import Toolbar from '@material-ui/core/Toolbar';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import Identicon from 'react-identicons';
 import { withStyles } from '@material-ui/core/styles';
 
-import {
-	HashRouter as Router,
-	NavLink,
-	withRouter
-} from "react-router-dom";
-
-import { Show } from "Component/Helpers";
-
-const RouterTabs = withRouter((props) =>
-	<Tabs value={ props.location.pathname } { ...props } >{ props.children }</Tabs>
-);
+import TabBar from "Component/TabBar";
 
 const lightColor = 'rgba(255, 255, 255, 0.7)';
 
@@ -71,7 +59,11 @@ function Header(props) {
 								</IconButton>
 							</Grid>
 						</Hidden>
-						<Grid item xs />
+						<Grid item xs>
+							<Typography color="inherit" variant="h5" component="h1">
+								{ props.title || '' }
+							</Typography>
+						</Grid>
 						<Grid item>
 							<Tooltip title="Alerts • No alerts">
 								<IconButton color="inherit">
@@ -89,44 +81,9 @@ function Header(props) {
 					</Grid>
 				</Toolbar>
 			</AppBar>
-			<AppBar
-				component="div"
-				className={classes.secondaryBar}
-				color="primary"
-				position="static"
-				elevation={0}
-			>
-				<Toolbar>
-					<Grid container alignItems="center" spacing={1}>
-						<Grid item xs>
-							<Typography color="inherit" variant="h5" component="h1">
-								{ props.title || '' }
-							</Typography>
-						</Grid>
-					</Grid>
-				</Toolbar>
-			</AppBar>
-
-			<Show If={ props.tabs }>
-				<Router hashType="noslash">
-					<AppBar
-						component="div"
-						className={classes.secondaryBar}
-						color="primary"
-						position="static"
-						elevation={0}
-					>
-						<RouterTabs textColor="inherit">
-							{ (props.tabs||[]).sort(({order: a }, {order: b})=> a-b ).map(({label, ...rest}) => ({ label,  value: label.replace(/[]/g,''),...rest })).map(({label, value})=>(
-								<Tab textColor="inherit" label={ label } value={`/${value}`} component={NavLink} to={`/${value}`} />
-							))}
-						</RouterTabs>
-					</AppBar>
-					<Show If={ props.children }>
-						{ props.children }
-					</Show>
-				</Router>
-			</Show>
+			<TabBar tabs={props.tabs} >
+				{ props.children }
+			</TabBar>
 		</React.Fragment>
 	);
 }
