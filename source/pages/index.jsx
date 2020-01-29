@@ -9,6 +9,11 @@ import { createMuiTheme, ThemeProvider, withStyles } from '@material-ui/core/sty
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Hidden from '@material-ui/core/Hidden';
 
+import { connect } from "react-redux";
+import { startSignin } from "Include/reducers/identity";
+import { bindActionCreators } from 'redux'
+
+
 let theme = createMuiTheme({
 	palette: {
 		primary: {
@@ -170,6 +175,11 @@ const Teams         = lazy(() => import('Page/teams'));
 export const App = (props) => {
 	const { classes } = props;
 
+	if (!(props.user || props.userLoading || props.signedIn || props.signinError)) {
+		props.startSignin();
+		//TODO: find a way to signal app state/redirect page here.
+	}
+
 	return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
@@ -237,4 +247,12 @@ export const App = (props) => {
 	);
 };
 
-export default withStyles(styles)(App);
+const stateToProps = ({oidc, identity}) => ({
+	user: oidc.user,
+	userLoading: oidc.isLoadingUser,
+	signedIn: identity.signedIn,
+	signinError: identity.error,
+});
+const dispatchToProps = (dispatch) => bindActionCreators({startSignin}, dispatch);
+
+export default connect(stateToProps, dispatchToProps)(withStyles(styles)(App));

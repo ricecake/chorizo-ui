@@ -7,6 +7,7 @@ import userManager from "Include/userManager";
 
 const loggerMiddleware = store => next => action => {
 	console.log("Action type:", action.type);
+	console.log("action", action);
 	console.log("State before:", store.getState());
 	next(action);
 	console.log("State after:", store.getState());

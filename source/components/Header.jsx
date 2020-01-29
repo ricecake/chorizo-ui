@@ -12,6 +12,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Toolbar from '@material-ui/core/Toolbar';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
+import Identicon from 'react-identicons';
 import { withStyles } from '@material-ui/core/styles';
 
 import {
@@ -80,7 +81,9 @@ function Header(props) {
 						</Grid>
 						<Grid item>
 							<IconButton color="inherit" className={classes.iconButtonAvatar}>
-								<Avatar src="/static/images/avatar/1.jpg" alt="My Avatar" />
+								<Avatar alt="My Avatar" >
+									<Identicon string={ props.ident_string } size="25"/>
+								</Avatar>
 							</IconButton>
 						</Grid>
 					</Grid>
