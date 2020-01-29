@@ -176,9 +176,7 @@ export const App = (props) => {
 	const { classes } = props;
 
 	if (!(props.user || props.userLoading || props.signedIn || props.signinError)) {
-		console.log(props.location.pathname);
-		props.startSignin();
-		//TODO: find a way to signal app state/redirect page here.
+		props.startSignin({ redirect_to: props.location.pathname });
 	}
 
 	return (
