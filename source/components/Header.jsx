@@ -12,8 +12,14 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import Identicon from 'react-identicons';
 import { withStyles } from '@material-ui/core/styles';
+import { Show } from "Component/Helpers";
 
 import TabBar from "Component/TabBar";
+
+import { connect } from "react-redux";
+import { logout } from "Include/reducers/identity";
+import { bindActionCreators } from 'redux'
+
 
 const lightColor = 'rgba(255, 255, 255, 0.7)';
 
@@ -73,10 +79,15 @@ function Header(props) {
 						</Grid>
 						<Grid item>
 							<IconButton color="inherit" className={classes.iconButtonAvatar}>
-								<Avatar alt="My Avatar" >
+								<Avatar alt={ props.name } >
 									<Identicon string={ props.ident_string } size="25"/>
 								</Avatar>
 							</IconButton>
+							<Show If={ props.name }>
+								<Typography color="inherit" variant="caption">
+									{ props.name }
+								</Typography>
+							</Show>
 						</Grid>
 					</Grid>
 				</Toolbar>
@@ -93,4 +104,10 @@ Header.propTypes = {
 	onDrawerToggle: PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(Header);
+const stateToProps = ({oidc}) => ({
+	ident_string: oidc.user.profile.sub,
+	name: oidc.user.profile.preferred_name,
+});
+const dispatchToProps = (dispatch) => bindActionCreators({ logout }, dispatch);
+
+export default connect(stateToProps, dispatchToProps)(withStyles(styles)(Header));
