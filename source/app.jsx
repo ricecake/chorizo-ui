@@ -10,10 +10,14 @@ import {
 	BrowserRouter as Router,
 	Switch,
 	Route,
-  } from "react-router-dom";
+	withRouter,
+} from "react-router-dom";
 
 import App from "Page/index";
 import Oauth from "Page/oauth";
+
+const RouterApp = withRouter(App);
+
 
 ReactDOM.render((
 	<Provider store={store}>
@@ -24,7 +28,7 @@ ReactDOM.render((
 						<Oauth />
 					</Route>
 					<Route path="/">
-						<App />
+						<RouterApp />
 					</Route>
 				</Switch>
 			</Router>
