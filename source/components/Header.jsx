@@ -12,6 +12,12 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import Identicon from 'react-identicons';
 import { withStyles } from '@material-ui/core/styles';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+
+import Link from '@material-ui/core/Link';
+import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import { Link as RouterLink } from 'react-router-dom';
+
 import { Show } from "Component/Helpers";
 
 import TabBar from "Component/TabBar";
@@ -20,6 +26,15 @@ import { connect } from "react-redux";
 import { logout } from "Include/reducers/identity";
 import { bindActionCreators } from 'redux'
 
+import {
+	withRouter
+} from "react-router-dom";
+
+const urlNameMap = {
+	'/': 'Home',
+}
+
+const ucfirst = (string = "") => string[0].toUpperCase() + string.slice(1);
 
 const lightColor = 'rgba(255, 255, 255, 0.7)';
 
@@ -43,7 +58,47 @@ const styles = theme => ({
 	button: {
 		borderColor: lightColor,
 	},
+	root: {
+		display: 'flex',
+		flexDirection: 'column',
+		width: 360,
+	},
+	lists: {
+		backgroundColor: theme.palette.background.paper,
+		marginTop: theme.spacing(1),
+	},
+	nested: {
+		paddingLeft: theme.spacing(4),
+	},
 });
+
+const LinkRouter = props => <Link {...props} component={RouterLink} />;
+
+const RouterBreadcrumbs = withRouter(withStyles(styles)((props) => {
+	const { classes, location } = props;
+	const pathnames = ['', ...location.pathname.split('/').filter(x => x)];
+
+	return (
+		<div className={classes.root}>
+			<Breadcrumbs aria-label="breadcrumb" separator={<NavigateNextIcon fontSize="small" />} >
+				{pathnames.map((value, index) => {
+					const last = index === pathnames.length - 1;
+					const to = `/${pathnames.slice(0, index + 1).join('/')}`;
+
+					return last ? (
+						<Typography color="inherit" key={to} variant="h5" component="h1">
+							{ urlNameMap[to] || ucfirst(value) }
+						</Typography>
+					) : (
+						<LinkRouter color="inherit" to={to} key={to} variant="h5" component="h1">
+							{ urlNameMap[to] || ucfirst(value) }
+						</LinkRouter>
+					);
+				})}
+			</Breadcrumbs>
+		</div>
+	);
+}));
 
 function Header(props) {
 	const { classes, onDrawerToggle } = props;
@@ -66,9 +121,7 @@ function Header(props) {
 							</Grid>
 						</Hidden>
 						<Grid item xs>
-							<Typography color="inherit" variant="h5" component="h1">
-								{ props.title || '' }
-							</Typography>
+							<RouterBreadcrumbs />
 						</Grid>
 						<Grid item>
 							<Tooltip title="Alerts • No alerts">

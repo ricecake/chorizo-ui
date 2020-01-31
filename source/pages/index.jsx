@@ -176,6 +176,7 @@ export const App = (props) => {
 
 	if (!(props.user || props.userLoading || props.signedIn || props.signinError)) {
 		props.startSignin({ redirect_to: props.location.pathname });
+		return null;
 	}
 
 	return (
