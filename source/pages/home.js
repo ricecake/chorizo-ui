@@ -4,11 +4,11 @@ import {
 	Route,
 } from "react-router-dom";
 
-import Header from "Component/Header";
+import TabBar from "Component/TabBar";
 
 export const DefaultPage = (props) => (
 	<React.Fragment>
-		<Header title="DefaultPage" tabs={[
+		<TabBar tabs={[
 			{ label: "Parrots", value:"" },
 			{ label: "Cat" },
 			{ label: "Dog" },
@@ -24,7 +24,7 @@ export const DefaultPage = (props) => (
 					<h1>Parrots!</h1>
 				</Route>
 			</Switch>
-		</Header>
+		</TabBar>
 	</React.Fragment>
 );
 export default DefaultPage;

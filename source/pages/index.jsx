@@ -154,6 +154,7 @@ const styles = {
 
 
 import Navigator from "Component/Navigator";
+import Header from "Component/Header";
 
 const Home  = lazy(() => import('Page/home'));
 
@@ -195,6 +196,7 @@ export const App = (props) => {
 					</Hidden>
 				</nav>
 				<div className={classes.app}>
+					<Header/>
 					<Suspense fallback={<div>Loading...</div>}>
 						<Switch>
 							<Route path="/chores/upcoming">

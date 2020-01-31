@@ -83,7 +83,7 @@ const RouterBreadcrumbs = withRouter(withStyles(styles)((props) => {
 			<Breadcrumbs aria-label="breadcrumb" separator={<NavigateNextIcon fontSize="small" />} >
 				{pathnames.map((value, index) => {
 					const last = index === pathnames.length - 1;
-					const to = `/${pathnames.slice(0, index + 1).join('/')}`;
+					const to = `/${pathnames.slice(1, index + 1).join('/')}`;
 
 					return last ? (
 						<Typography color="inherit" key={to} variant="h5" component="h1">
@@ -145,9 +145,6 @@ function Header(props) {
 					</Grid>
 				</Toolbar>
 			</AppBar>
-			<TabBar tabs={props.tabs} >
-				{ props.children }
-			</TabBar>
 		</React.Fragment>
 	);
 }
@@ -157,10 +154,15 @@ Header.propTypes = {
 	onDrawerToggle: PropTypes.func.isRequired,
 };
 
-const stateToProps = ({oidc}) => ({
-	ident_string: oidc.user.profile.sub,
-	name: oidc.user.profile.preferred_name,
-});
+const stateToProps = ({oidc}) => {
+	const userData = oidc.user || {};
+	const profileData = userData.profile || {};
+
+	return {
+		ident_string: profileData.sub,
+		name: profileData.preferred_name,
+	};
+};
 const dispatchToProps = (dispatch) => bindActionCreators({ logout }, dispatch);
 
 export default connect(stateToProps, dispatchToProps)(withStyles(styles)(Header));
