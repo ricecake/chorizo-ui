@@ -12,7 +12,7 @@ const common = {
 };
 const dev = {
 	hosts: {
-		api_path: 'https://chorizo.api.devhost.dev',
+		api_path: 'https://chorizo-api.devhost.dev',
 		idp_path: 'https://login.devhost.dev',
 		app_path: 'https://chorizo.devhost.dev'
 	},
@@ -22,7 +22,7 @@ const dev = {
 };
 const production = {
 	hosts: {
-		api_path: 'https://chorizo.api.greenstuff.io',
+		api_path: 'https://chorizo-api.greenstuff.io',
 		idp_path: 'https://login.greenstuff.io',
 		app_path: 'https://chorizo.greenstuff.io'
 	},
