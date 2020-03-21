@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[12],{z4sp:function(n,t,e){"use strict";e.r(t),e.d(t,"Shop",(function(){return r}));var u=e("q1tI"),o=e.n(u),r=function(){return o.a.createElement("div",null)};t.default=r}}]);

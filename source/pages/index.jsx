@@ -180,6 +180,15 @@ export const App = (props) => {
 		return null;
 	}
 
+	if (props.user && props.user.access_token) {
+		// Do api call for ensuring basic user properties exist
+		// User settings record
+		// Initial user task group
+		// A TODO for "use a password manager, like lastpass or bitwarden"
+		// A recurring task for "rotate your passwords".  Twice a year.
+		// Those initial tasks can be skipped if we see that the user record already exists.
+	}
+
 	return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline />

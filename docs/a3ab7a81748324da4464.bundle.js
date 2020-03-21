@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[10],{N92I:function(n,e,t){"use strict";t.r(e),t.d(e,"People",(function(){return r}));var u=t("q1tI"),o=t.n(u),r=function(){return o.a.createElement("div",null)};e.default=r}}]);
