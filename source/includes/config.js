@@ -27,7 +27,7 @@ const production = {
 		app_path: 'https://chorizo.greenstuff.io'
 	},
 	identity: {
-		client_id: 'invalid_id',
+		client_id: '_3tPShR_Rb-tUNIYZKyeTA',
 	},
 };
 
