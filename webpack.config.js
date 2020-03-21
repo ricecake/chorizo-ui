@@ -29,7 +29,9 @@ module.exports = {
 		publicPath: '/',
 	},
 	plugins: [
-		new CleanWebpackPlugin(),
+		new CleanWebpackPlugin({
+			cleanOnceBeforeBuildPatterns: ['**/*', '!CNAME'],
+		}),
 		new webpack.EnvironmentPlugin({
 			production: false,
 		}),
