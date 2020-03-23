@@ -17,15 +17,22 @@ let pages = glob.sync(path.resolve(__dirname, 'source/pages/**/*.jsx')).reduce((
 
 console.log(pages);
 
+let mode = 'development';
+let outPath = '/built/';
+if (process.env.production) {
+	mode = 'production';
+	outPath = '/docs/';
+}
+
 module.exports = {
-	mode: "production",
+	mode: mode,
 	entry: {
 		app: path.resolve(__dirname, 'source/app.jsx'),
 	},
 	output: {
 		filename: '[name].js',
 		chunkFilename: '[chunkhash].bundle.js',
-		path: path.resolve(__dirname) +'/docs/',
+		path: path.resolve(__dirname) + outPath,
 		publicPath: '/',
 	},
 	plugins: [
